@@ -1,36 +1,41 @@
 ---
-title: "Programming Assigment 2 Program Code"
+title: "Programming Assignment 2 Code in Markdown format"
 author: "David F George"
 date: "Tuesday, May 19, 2015"
 output: html_document
 ---
 
-```{r}
-## The following two functions are used to compute the inverse of ## a matrix
+This is an R Markdown document produced by RStudio containing the R code for functions
+'makeCacheMatrix' and 'cacheSolve'
+
+```
+## The following two functions are used to compute the inverse of a matrix
 ##
-## If the matrix has been previously computed and cached then the ## inverse of a matrix will be returned without unnecessarily and ## repeatedly computing a result thereby saving time
+## If the matrix has been previously computed and cached then the inverse of a matrix will be 
+## returned without unnecessarily and repeatedly computing a result thereby saving time
 
 
 
 ## The function 'makeCacheMatrix' specified below
-## creates a 'special' matrix comprising a list of named functions ## that will perform the following operations on a given (squared) ## matrix:
+## creates a 'special' matrix comprising a list of named functions that will perform the following
+## operations on a given (squared) matrix:
 ##
 ##              1. set the matrix
 ##              2. get the matrix
 ##              3. set the inverse
 ##              4. get the inverse
 ##
-## and are used within cacheSolve()as appropriate
+## and are used within cacheSolve()as is appropriate
 
 makeCacheMatrix <- function(x = matrix()) {
         
         ## the input variable defined by input argumant 'x' is the matrix of interest
-               
+        
         set    = function(y) {
                 
-                 ## use `<<-` assignment operator to assign values to objects outside this function in a parent environment
-                 x   <<- y
-                 inv <<- NULL
+                ## use `<<-` assignment operator to assign values to objects outside this function in a parent environment
+                x   <<- y
+                inv <<- NULL
         }
         get    = function() x
         
@@ -43,7 +48,7 @@ makeCacheMatrix <- function(x = matrix()) {
         return(list(set=set, get=get, setinv=setinv, getinv=getinv))
 }
 
-## The following cacheSolve function performs the actual inversion computation, if neccessary
+## The following 'cacheSolve' function performs the actual inversion computation, if neccessary
 ## on the matrix created by the above makeCacheMatrix function
 
 ## First check to see if the inverse has already been calculated, and if so, return
@@ -53,10 +58,10 @@ makeCacheMatrix <- function(x = matrix()) {
 cacheSolve <- function(x, ...) {
         
         ## argument x is the output matrix from makeCacheMatrix()
-                
+        
         inv = x$getinv()
         
-        ## Test if the inverse has already been calculated
+        ## test if the inverse has already been calculated
         
         if (!is.null(inv)){
                 
@@ -66,19 +71,19 @@ cacheSolve <- function(x, ...) {
                 return(inv)
         }
         else {
-        
+                
                 # it is necessary to compute the inverse
                 
                 message("New matrix values so computing matrix inverse and storing in cache for future use")
-                
                 mat.data = x$get()
                 inv      = solve(mat.data, ...)
                 
-                # set the cache value of the matrix inverse
+                # set the cache value of the inverse
                 
                 x$setinv(inv)
         }
-        return(inv) ## return the computed matrix inverse
+        return(inv) ## return the re-computed inverse
 }
 ```
+
 
